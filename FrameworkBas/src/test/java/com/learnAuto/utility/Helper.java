@@ -14,13 +14,13 @@ import org.testng.annotations.BeforeSuite;
 
 public class Helper {
 	
-	public static void captureScreenshot(WebDriver driver)
+	public static String captureScreenshot(WebDriver driver)
 	{
 		
 		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String screenshotPath;
+		String screenshotPath=System.getProperty("user.dir")+"/Screenshots/parabank_"+getCurrentDateTime()+ ".png";
 		try {
-			FileHandler.copy(src, new File("./Screenshots/parabank_"+getCurrentDateTime()+ "Login.png"));
+			FileHandler.copy(src, new File(screenshotPath));
 			
 			System.out.println("Screen captured");
 			
@@ -28,6 +28,7 @@ public class Helper {
 			// TODO Auto-generated catch block
 			System.out.println("Unable to captrue screenshots" + e.getMessage());
 		}
+		return screenshotPath;
 	}
 	
 	
